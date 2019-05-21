@@ -1,0 +1,12 @@
+extends layout
+
+block content
+	.container-fluid
+		center
+					div(id="myimg",style="width:300px; height: 300px; border-radius:50%; color:transparent;")
+						img(style="width:300px; height: 300px; border-radius:50%", src=username)
+						.centered CHANGE
+
+					h1.prtex NAME:---     #{user.name}
+					h1.prtex USERNAME :---  #{user.username}
+					h1.prtex EMAIL	:--- #{user.email}

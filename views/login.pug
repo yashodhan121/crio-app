@@ -1,0 +1,125 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Login
+    link(href='https://fonts.googleapis.com/css?family=Roboto', rel='stylesheet')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    style(type='text/css').
+      body {
+      color: #4e4e4e;
+      background: #424242;
+      font-family: 'Roboto', sans-serif;
+      }
+      .form-control {
+      background: #f2f2f2;
+      font-size: 16px;
+      border-color: #000;
+      box-shadow: none !important;
+      }
+      .form-control:focus {
+      border-color: #91d5a8;
+      background: #e9f5ee;
+      }
+      .form-control, .btn {
+      border-radius: 20px;
+      }
+      .login-form {
+      width: 350px;
+      margin: 0 auto;
+      padding : 60px 0px;
+      }
+      .login-form h2 {
+      margin: 0;
+      padding: 15px 0;
+      font-size: 34px;
+      }
+      .login-form .avatar {
+      margin: 0 auto 30px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      z-index: 9;
+      background: #4aba70;
+      padding: 15px;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+      }
+      .login-form .avatar img {
+      width: 100%;
+      }
+      .login-form form {
+      color: #7a7a7a;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      background: #fff;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      }
+      .login-form .btn {
+      font-size: 16px;
+      line-height: 26px;
+      min-width: 120px;
+      font-weight: bold;
+      background: #4aba70;
+      border: none;
+      border-radius: 10px;
+      }
+      .login-form .btn:hover, .login-form .btn:focus{
+      background: #40aa65;
+      outline: none !important;
+      }
+      .checkbox-inline {
+      margin-top: 14px;
+      }
+      .checkbox-inline input {
+      margin-top: 3px;
+      }
+      .login-form a {
+      color: #4aba70;
+      }
+      .login-form a:hover {
+      text-decoration: underline;
+      }
+      .hint-text {
+      color: #999;
+      text-align: center;
+      padding-bottom: 15px;
+      }
+      .alert-danger{
+      color: #a94442;
+      background-color: #f2dede;
+      border-color: #ebccd1;
+      }
+
+      .alert-success_msg{
+      color: #3c763d;
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+      }
+  body
+    .login-form
+      form(action='/users/login', method='post')
+        != messages('message', locals)
+        if errors
+          each error, i in errors
+            div(class="alert alert-danger") #{error.msg}
+        h2.text-center Member Login
+        .avatar
+          img(src='/images/avatar.png', alt='Avatar')
+        .form-group
+          input.form-control.input-lg(type='text', name='username', placeholder='Username', required='required')
+        .form-group
+          input.form-control.input-lg(type='password', name='password', placeholder='Password', required='required')
+        .form-group.clearfix
+          label.pull-left.checkbox-inline
+            input(type='checkbox')
+            |  Remember me
+          button.btn.btn-primary.btn-lg.pull-right(type='submit') Sign in
+      .hint-text
+        | Don't have an account? 
+        a(href='/users/register') Sign up here

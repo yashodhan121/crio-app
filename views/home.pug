@@ -1,0 +1,75 @@
+doctype html
+html(lang='en')
+  head
+    title Home
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/styles.css')
+    link(href='https://fonts.googleapis.com/css?family=Montserrat', rel='stylesheet')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js')
+    style.
+      body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+      }
+  body
+    // Navbar
+    nav.navbar.navbar-default
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') CRIO
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='#') HOME
+            li
+              a(href='#') ABOUT
+            if user
+              li
+                a(href='/users/logout') LOGOUT
+            else
+              li
+                a(href='/users/register') REGISTER
+              li
+                a(href='/users/login') LOGIN
+    // First Container
+    .container-fluid.bg-1.text-center
+      h1.margin(style="font-size:90px; color:#880E4F; font-weight:700; font-family:sans-serif; letter-spacing:1px")
+        .line-1.anim-typewriter #Crio
+      h3 We Are Connectors
+    // Second Container
+    .container-fluid.bg-2.text-center
+      h3.margin CONTACT
+      p.margin
+        | WE CAN BE ANYBODY FOR NOW WE CANNOT PROVIDE YOU DETAILS ABOUT US. AS WE WANT TO HELP ANONYMOUSLY
+      a.btn.btn-default.btn-lg(href='/crio/register')
+        span.glyphicon.glyphicon-hand-right
+        |  Register And Get Started
+    // Third Container (Grid)
+    .container-fluid.bg-3.text-center
+      h3.margin Where To Find Me?
+      br
+      .row
+        .col-sm-4
+          p
+            | This Is Me
+          img.img-responsive.img-circle.margin(src='/images/me.jpg', style='width:100', alt='Image')
+        .col-sm-4
+          p
+            | He Is My Developer
+          img.img-responsive.img-circle.margin(src='/images/developer.jpg', style='width:100%', alt='Image')
+        .col-sm-4
+          p
+            | He is My Debugger
+          img.img-responsive.img-circle.margin(src='/images/debugger.jpg', style='width:100%', alt='Image')
+    // Footer
+    footer.container-fluid.bg-4.text-center
+      p
+        | Crio A Social Network App &copy; 2019
