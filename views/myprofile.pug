@@ -3,10 +3,9 @@ extends layout
 block content
 	.container-fluid
 		center
-					div(id="myimg",style="width:300px; height: 300px; border-radius:50%; color:transparent;")
-						img(style="width:300px; height: 300px; border-radius:50%", src=username)
-						.centered CHANGE
+			.container1
+				img.image(src=username, alt='Avatar')   
+				.overlay
+					a(href="/users/fileupload" style="text-decoration:none;").text CHANGE
 
-					h1.prtex NAME:---     #{user.name}
-					h1.prtex USERNAME :---  #{user.username}
-					h1.prtex EMAIL	:--- #{user.email}
+			h1.prtex #{user.name}

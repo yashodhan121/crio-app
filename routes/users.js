@@ -81,7 +81,7 @@ router.get('/login', function(req,res){
 //login process
 router.post('/login', function(req, res, next){
     passport.authenticate('local',{
-      successRedirect:'/crio/layout',
+      successRedirect:'/users/myprofile',
       failureRedirect: '/users/login',
       failureFlash: true
     })(req, res, next);
@@ -102,7 +102,7 @@ router.post('/fileupload', function(req, res){
   var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
     var oldpath = files.filetoupload.path;
-console.log(oldpath);
+//console.log(oldpath);
 var newpath = path.join(__dirname,'../public/img/') + req.user.username+'.png';
 fs.readFile(oldpath, function (err, data) {
 if (err) throw err;
@@ -126,7 +126,6 @@ console.log('File deleted!');
 });
 
 router.get('/myprofile', function(req, res){
-  console.log("/img/"+ req.user.username+".png");
   res.render('myprofile',{
     user: req.user,
     username: "/img/"+ req.user.username+".png"

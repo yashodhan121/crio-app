@@ -1,8 +1,68 @@
-extends layout
+doctype html
+html(lang='en')
+	head
+		title Home
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/styles.css')
+		link(href='https://fonts.googleapis.com/css?family=Montserrat', rel='stylesheet')
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js')
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js')
+		style.
+			body {
+			font: 20px Montserrat, sans-serif;
+			line-height: 1.8;
+			color: #f5f6f7;
+			}
+			input{
 
-block content
-	form(action='/users/fileupload',method='post', enctype='multipart/form-data')
-		input(type='file', name='filetoupload')
-		br
-		input(type='submit')
+			}
+			.input1
+				{
+				color:#fff;
+				background-color:#1A237E;
+				width:200px;
+				height:40px;
+				border: 0;
+				border-radius:10px;
+				}
+				.input2
+					{
+					color:#fff;
+				background-color:#1A237E;
+				width:300px;
+				height:40px;
+				border: 0;
+				border-radius:10px;
+					}
+	body
+		// Navbar
+		nav.navbar.navbar-default
+			.container
+				.navbar-header
+					button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href='#') CRIO 
+				#myNavbar.collapse.navbar-collapse
+					ul.nav.navbar-nav.navbar-right
+						li
+							a(href='/') HOME
+						li
+							a(href='/users/profile') EDIT PROFILE
+						if user
+							li
+								a(href='/users/logout') LOGOUT
+						else
+							li
+								a(href='/users/register') REGISTER
+							li
+								a(href='/users/login') LOGIN
+		center
+			form(action='/users/fileupload',method='post',enctype='multipart/form-data', style="margin-top:100px;")
+				input(id="in", type="file" , name="filetoupload")
+				br
+				input.input1(type='submit')
 
