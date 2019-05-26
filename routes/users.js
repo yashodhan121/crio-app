@@ -95,7 +95,9 @@ router.get('/logout', function(req, res){
 })
 
 router.get('/fileupload', function(req, res){
-  res.render('profile');
+  res.render('profile',{
+    username: "/img/"+ req.user.username+".png"
+  });
 });
 
 router.post('/fileupload', function(req, res){
@@ -111,7 +113,7 @@ console.log('File read!');
 // Write the file
 fs.writeFile(newpath, data, function (err) {
 if (err) throw err;
-res.redirect('/users/myprofile')
+res.redirect('/users/fileupload')
 res.end();
 console.log('File written!');
 });
@@ -131,5 +133,11 @@ router.get('/myprofile', function(req, res){
     username: "/img/"+ req.user.username+".png"
   });
 });
+
+router.get('/edit',function(req,res){
+  res.render('editprofilepic',{
+    username: "/img/"+ req.user.username+".png"
+  })
+})
 
 module.exports = router;

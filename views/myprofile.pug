@@ -4,7 +4,8 @@ block content
 	.container-fluid
 		center
 			.container1
-				img.image(src=username, alt='Avatar')   
+				if username
+					img.image(src=username,onerror="this.src='/img/avatar.png'", alt='Avatar')   
 				.overlay
 					a(href="/users/fileupload" style="text-decoration:none;").text CHANGE
 
