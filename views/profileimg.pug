@@ -1,0 +1,86 @@
+doctype html
+html(lang='en')
+	head
+		title Home
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/styles.css')
+		link(href='https://fonts.googleapis.com/css?family=Montserrat', rel='stylesheet')
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js')
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js')
+		style.
+			body {
+			font: 20px Montserrat, sans-serif;
+			line-height: 1.8;
+			color: #f5f6f7;
+			}
+			input{
+
+			}
+			.input1
+				{
+				color:#fff;
+				background-color:#1A237E;
+				width:200px;
+				height:40px;
+				border: 0;
+				border-radius:10px;
+				}
+				.input2
+					{
+					color:#fff;
+				background-color:#1A237E;
+				width:300px;
+				height:40px;
+				border: 0;
+				border-radius:10px;
+					}
+				label{
+				width: 300px;
+				height: 40px;
+				padding: 10px;
+				background: red; 
+				display: table;
+				color: #000;
+				border-radius: 20px;
+				 }
+				input[type="file"] {
+						display: none;
+				}
+	body
+		// Navbar
+		nav.navbar.navbar-default
+			.container
+				.navbar-header
+					button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href='#') CRIO 
+				#myNavbar.collapse.navbar-collapse
+					ul.nav.navbar-nav.navbar-right
+						li
+							a(href='/') HOME
+						li
+							a(href='/users/myprofile') PROFILE
+						if user
+							li
+								a(href='/users/logout') LOGOUT
+						else
+							li
+								a(href='/users/register') REGISTER
+							li
+								a(href='/users/login') LOGIN
+		center
+			img.image(src=username,onerror="this.src='/img/avatar.png'", alt='Avatar') 
+			form(action='/users/fileupload',method='post',enctype='multipart/form-data', style="margin-top:100px;")
+				label
+					center
+						| SELECT IMAGE
+					input(id="in", type="file" , name="filetoupload")
+				br
+				input.input1(type='submit')
+				a(href="/users/edit", style="text-decoration: none;") 
+					h1(style="color: #000; margin-top: 30px; background-color:#000; color:#fff; font-size:25px; border-radius:20px; height: 30px;") Add Styles to current image
+

@@ -46,7 +46,8 @@ router.post('/register', function(req, res){
       name:name,
       email:email,
       username:username,
-      password:password
+      password:password,
+      profileimg:"/img/"+username+".png"
     });
     var lt = newUser;
   bcrypt.genSalt(10, function(err, salt){
@@ -95,7 +96,7 @@ router.get('/logout', function(req, res){
 })
 
 router.get('/fileupload', function(req, res){
-  res.render('profile',{
+  res.render('profileimg',{
     username: "/img/"+ req.user.username+".png"
   });
 });
@@ -130,14 +131,36 @@ console.log('File deleted!');
 router.get('/myprofile', function(req, res){
   res.render('myprofile',{
     user: req.user,
-    username: "/img/"+ req.user.username+".png"
+    username: req.user.profileimg
   });
 });
 
 router.get('/edit',function(req,res){
   res.render('editprofilepic',{
-    username: "/img/"+ req.user.username+".png"
-  })
-})
+    username: req.user.profileimg
+  });
+});
+
+router.get('/find', (req, res)=>{
+  User.find({}, function(err, users){
+    if(err){
+      res.redirect('/user/login');
+    }
+    else{
+      res.render('findpeople',{
+        users: users,
+        user : req.user
+      });
+    }
+  });
+});
+
+router.get('/profile/:id', function(req, res){
+  User.findById(req.params.id, function(err, user){
+      res.render('profile', {
+        user: user
+      });
+  });
+});
 
 module.exports = router;
