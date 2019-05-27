@@ -144,8 +144,10 @@ body
         height:36px; 
         border-radius:20px;
         margin-left: -8px;
+        transition: 1s;
       }
       .but:hover
       {
         background-color: #E91E63;
+        transition: 1s;
       }

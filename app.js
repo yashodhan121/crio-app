@@ -84,6 +84,7 @@ app.get('*', function(req, res, next){
 
 //Bring in models
 let user = require('./models/user');
+let Follow = require('./models/follow');
 
 //Home Route
 app.get('/', (req, res)=>{

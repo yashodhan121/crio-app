@@ -12,6 +12,7 @@ router.use(express.static(path.join(__dirname,'public')));
 
 //Bring in models
 let User = require('../models/user');
+let Follow = require('../models/follow');
 
 //Register form
 router.get('/register', function(req,res){
@@ -155,10 +156,66 @@ router.get('/find', (req, res)=>{
   });
 });
 
+
+//followprocess
+var fol = "Follow";
 router.get('/profile/:id', function(req, res){
   User.findById(req.params.id, function(err, user){
-      res.render('profile', {
+    Follow.findOne({'username':req.user.username}, function(err, nfollow){
+      if(err)
+      {
+
+      }
+      try
+      {
+        if(nfollow.request==1)
+        {
+          fol="requested";
+        }
+      }
+      catch
+      {
+        res.render('profile', {
+        fol: fol,
         user: user
+      });
+      }
+    });
+      res.render('profile', {
+        fol: fol,
+        user: user
+      });
+  });
+});
+
+router.post('/profile/:id', function(req, res){
+  User.findById(req.params.id, function(err, nuser){
+      var nusername= nuser.username;
+      var name= req.user.name;
+      var username= req.user.username;
+      var profileimg= req.user.profileimg;
+      var follow= 0;
+      var request= 1;
+      let newFollower = new Follow({
+        nusername: nusername,
+        name: name,
+        username: username,
+        profileimg: profileimg,
+        follow: follow,
+        request: request
+      });
+      newFollower.save(function(err){
+        if(err){
+          res.redirect('/users/profile/'+req.params.id);
+          return;
+        }
+        else
+        {
+          res.render('profile', {
+            fol: "Requested",
+            user: nuser
+          });
+        }
       });
   });
 });
