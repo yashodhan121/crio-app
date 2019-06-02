@@ -5,7 +5,6 @@ const FollowSchema = mongoose.Schema({
   nusername:{
     type: String,
     required: true,
-    unique:true
   },
   name:{
     type: String,

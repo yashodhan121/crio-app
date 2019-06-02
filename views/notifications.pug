@@ -1,0 +1,25 @@
+extends layout
+
+block content
+	center
+		.container(style="width:390px;")
+			h2(style="color:#000;") NOTIFICATIONS
+			.space(style="height:12px;")
+			ul.list-group
+				each not, i in notify
+					each use, j in user
+						if(not.username == use.username)
+							a(href="/users/profile/"+use._id, style="text-decoration:none")
+								li.list-group-item(style="border:0; margin-top:10px;")
+									img(src=use.profileimg, onerror="this.src='/img/avatar.png'", style="width: 80px; height: 80px; border-radius:50%;")
+									h3(style="color:#880E4F; margin-top:-0.1px")= not.name
+									form(Action='/users/profile/'+not._id+'/acc' , method='post')
+										button(style="float:left; color:#fff; background-color:blue; width:150px; height:36px; border-radius:20px; border:0;")
+											.buti
+												| Accept
+									form(Action='/users/profile/'+not._id+'/rej' , method='post')
+										button(style="float:right; color:#fff; background-color:red; width:150px; height:36px; border-radius:20px; border:0;")
+											.buti
+												| Reject
+									br
+							hr(style="color:#000; background-color:#000; border-width:1px")

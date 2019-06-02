@@ -162,15 +162,15 @@ var fol = "Follow";
 router.get('/profile/:id', function(req, res){
   User.findById(req.params.id, function(err, user){
     Follow.findOne({'username':req.user.username}, function(err, nfollow){
-      if(err)
-      {
-
-      }
       try
       {
-        if(nfollow.request==1)
+        if(nfollow.request==1&&nfollow.follow==0)
         {
           fol="requested";
+        }
+        else if(nfollow.follow==1&&nfollow.request==0)
+        {
+          fol="Following";
         }
       }
       catch
@@ -220,4 +220,48 @@ router.post('/profile/:id', function(req, res){
   });
 });
 
+//sending notifications
+router.get('/notify', function(req, res){
+  User.find(function(err, user){
+
+      Follow.find({nusername: req.user.username,request: 1},function(err, notify){
+      if(err)
+      {
+        console.log(err);
+      }
+      res.render('notifications',{
+        notify: notify,
+        user:user
+      });
+    });
+  });
+});
+
+router.post('/profile/:id/acc', function(req, res){
+    let follow = {};
+    follow.follow = 1;
+    follow.request = 0;
+    Follow.updateOne({_id: req.params.id} , follow , function(err){
+      if(err){
+        console.log(err);
+        return;
+      }
+      else
+      {
+        res.redirect('/users/notify');
+      }
+    });
+  });
+router.post('/profile/:id/rej', function(req, res){
+    Follow.deleteOne({_id: req.params.id}, function(err){
+      if(err){
+        console.log(err);
+        return;
+      }
+      else
+      {
+        res.redirect('/users/notify');
+      }
+    });
+  });
 module.exports = router;
