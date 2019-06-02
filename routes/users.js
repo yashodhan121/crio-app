@@ -161,7 +161,7 @@ router.get('/find', (req, res)=>{
 var fol = "Follow";
 router.get('/profile/:id', function(req, res){
   User.findById(req.params.id, function(err, user){
-    Follow.findOne({'username':req.user.username}, function(err, nfollow){
+    Follow.findOne({'nusername':user.username}, function(err, nfollow){
       try
       {
         if(nfollow.request==1&&nfollow.follow==0)

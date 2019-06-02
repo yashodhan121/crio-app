@@ -13,7 +13,6 @@ const FollowSchema = mongoose.Schema({
   username:{
     type: String,
     required: true,
-    unique:true
   },
   profileimg:{
     type: String,
