@@ -158,24 +158,21 @@ router.get('/find', (req, res)=>{
 
 
 //followprocess
-var fol = "Follow";
 router.get('/profile/:id', function(req, res){
   User.findById(req.params.id, function(err, users){
     Follow.findOne({username : req.user.username , nusername: users.username}, function(err, follows){
+        var fol = "Follow";
         console.log(follows);
         try{
-          if(follows.request = "1")
+          if(follows.request == "1" && follows.follow=="0")
           {
            fol = "Requested";
           }
-          if(follows.request = "0")
+          if(follows.request = "0" && follows.follow == "1")
           {
-            if(follows.follow = "1")
-            {
-              fol = "Following";
-            }
+            fol = "Following";
           }
-          else if(follows.follow = "0")
+          else if(follows.follow = "0" && follows.request =="0")
           {
             fol = "Follow";
           }
@@ -208,6 +205,7 @@ router.post('/profile/:id', function(req, res){
       });
       newFollow.save();
     });
+  res.redirect(req.originalUrl)
 });
 
 router.get('/notify', function(req, res){
@@ -277,4 +275,5 @@ router.post('/profile/:id/rej', function(req, res){
       });
     });
   });
+
 module.exports = router;

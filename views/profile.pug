@@ -4,7 +4,12 @@ block content
 	center
 		img.image(src=user.profileimg, onerror="this.src='/img/avatar.png'", style="border-radius:50%;")
 		h2(style="color:#000; margin-top:-0.1px")= user.name
-		form(Action='/users/profile/'+user._id , method='post')
+		if(fol == "Requested" || fol == "Following")
 			button(style="color:#fff; background-color:#880E4F; width:150px; height:36px; border-radius:20px; border:0;")
 				.but
 					| #{fol}
+		else
+			form(Action='/users/profile/'+user._id , method='post')
+				button(style="color:#fff; background-color:#880E4F; width:150px; height:36px; border-radius:20px; border:0;")
+					.but
+						| #{fol}
