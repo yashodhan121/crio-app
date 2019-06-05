@@ -151,3 +151,16 @@ body
         background-color: #E91E63;
         transition: 1s;
       }
+      .buti
+      {
+
+      }
+      .buti:hover
+      {
+        opacity: 0.5;
+        transform: scale(0.8);
+      }
+      .containerl
+      {
+        width: 330px;
+      }

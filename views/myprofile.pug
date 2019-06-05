@@ -13,3 +13,15 @@ block content
 			a(href="/users/find" style="text-decoration: none;")
 				button(style="color:#fff; background-color:#424242; border-radius:10px; width: 150px; height: 38px; border: 0;")
 					| Find People
+			br
+			.containerl
+				div(style="height:10px;")
+				form(Action='/users/followers', method='get')
+					button(style="float:left; color:#fff; background-color:#880E4F; width:150px; height:36px; border-radius:20px; border:0;")
+						.but
+							| Followers
+				form(Action='/users/following', method='get')
+					button(style="float:right; color:#fff; background-color:#880E4F; width:150px; height:36px; border-radius:20px; border:0;")
+						.but
+							| Following
+				br

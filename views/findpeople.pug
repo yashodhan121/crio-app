@@ -7,7 +7,7 @@ block content
 			.space(style="height:12px;")
 			ul.list-group
 				each use, i in users
-					if(user.username!=use.username)
+					if(user!=use.username)
 						a(href="/users/profile/"+use._id, style="text-decoration:none")
 							li.list-group-item(style="border:0; margin-top:10px;")
 								img(src=use.profileimg, onerror="this.src='/img/avatar.png'", style="width: 80px; height: 80px; border-radius:50%;")

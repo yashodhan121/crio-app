@@ -3,27 +3,18 @@ const mongoose = require('mongoose');
 //user Schema
 const FollowSchema = mongoose.Schema({
   nusername:{
-    type: String,
-    required: true,
-  },
-  name:{
-    type: String,
-    required: true
+    type: String
   },
   username:{
-    type: String,
-    required: true,
-  },
-  profileimg:{
-    type: String,
-    required: true
+    type: String
   },
   follow:{
-    type: Number
-  },
+    type: String
+  }, 
   request:{
-    type: Number
+    type: String
   }
+  
 });
 
 const Follow = module.exports = mongoose.model('follow', FollowSchema);

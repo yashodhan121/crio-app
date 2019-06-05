@@ -150,7 +150,7 @@ router.get('/find', (req, res)=>{
     else{
       res.render('findpeople',{
         users: users,
-        user : req.user
+        user : req.user.username
       });
     }
   });
@@ -160,67 +160,56 @@ router.get('/find', (req, res)=>{
 //followprocess
 var fol = "Follow";
 router.get('/profile/:id', function(req, res){
-  User.findById(req.params.id, function(err, user){
-    Follow.findOne({'nusername':user.username}, function(err, nfollow){
-      try
-      {
-        if(nfollow.request==1&&nfollow.follow==0)
-        {
-          fol="requested";
+  User.findById(req.params.id, function(err, users){
+    Follow.findOne({username : req.user.username , nusername: users.username}, function(err, follows){
+        console.log(follows);
+        try{
+          if(follows.request = "1")
+          {
+           fol = "Requested";
+          }
+          if(follows.request = "0")
+          {
+            if(follows.follow = "1")
+            {
+              fol = "Following";
+            }
+          }
+          else if(follows.follow = "0")
+          {
+            fol = "Follow";
+          }
         }
-        else if(nfollow.follow==1&&nfollow.request==0)
-        {
-          fol="Following";
+        catch{
+            res.render('profile', {
+          fol: fol,
+          user: users
+        });
         }
-      }
-      catch
-      {
         res.render('profile', {
         fol: fol,
-        user: user
+        user: users
       });
-      }
     });
-      res.render('profile', {
-        fol: fol,
-        user: user
-      });
   });
 });
-
 router.post('/profile/:id', function(req, res){
-  User.findById(req.params.id, function(err, nuser){
-      var nusername= nuser.username;
-      var name= req.user.name;
-      var username= req.user.username;
-      var profileimg= req.user.profileimg;
-      var follow= 0;
-      var request= 1;
-      let newFollower = new Follow({
-        nusername: nusername,
-        name: name,
-        username: username,
-        profileimg: profileimg,
-        follow: follow,
-        request: request
+  User.findById(req.params.id, function(err, users){
+      const nusername= users.username;
+      const username = req.user.username;
+      const request = "1";
+      const follow = "0";
+
+      newFollow = new Follow({
+        nusername : nusername,
+        username : username,
+        request : request,
+        follow : follow
       });
-      newFollower.save(function(err){
-        if(err){
-          res.redirect('/users/profile/'+req.params.id);
-          return;
-        }
-        else
-        {
-          res.render('profile', {
-            fol: "Requested",
-            user: nuser
-          });
-        }
-      });
-  });
+      newFollow.save();
+    });
 });
 
-//sending notifications
 router.get('/notify', function(req, res){
   User.find(function(err, user){
 
@@ -262,6 +251,30 @@ router.post('/profile/:id/rej', function(req, res){
       {
         res.redirect('/users/notify');
       }
+    });
+  });
+
+  router.get('/followers', function(req, res){
+    User.find({}, function(err, users){
+      Follow.find({nusername: req.user.username, follow: 1}, function(err, follow){
+        res.render('followers',{
+          users: users,
+          follow: follow
+        })
+      });
+    });
+  });
+
+
+  router.get('/following', function(req, res){
+    User.find({}, function(err, users){
+      Follow.find({username: req.user.username, follow: 1}, function(err, follow){
+        res.render('following',{
+          users: users,
+          follow: follow,
+          user1: req.user.username
+        })
+      });
     });
   });
 module.exports = router;
